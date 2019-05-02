@@ -10,13 +10,12 @@ function playSound(e) {
     key.classList.add('playing');
 }
 
+function removeTransition(e) {
+    if (e.propertyName !== 'transform') return; // return if the style is not transform
+    this.classList.remove('playing');
+}
 
-window.addEventListener('keydown', playSound)
-
+window.addEventListener('keydown', playSound);
 
 let keys = document.querySelectorAll('.key')
-
-keys.forEach(key => key.addEventListener('transitionend', function (e) {
-    if (e.propertyName !== 'transform') return; // return if the style is not transform
-    key.classList.remove('playing');
-}))
+keys.forEach(key => key.addEventListener('transitionend', removeTransition))
